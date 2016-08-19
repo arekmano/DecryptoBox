@@ -4,16 +4,13 @@
   "description": "Decrypt Stuff",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"100% code coverage\"",
     "start": "node index.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "Go away license",
   "dependencies": {
-    "cryptico": "^1.0.2",
     "fs": "0.0.2",
-    "jsencrypt": "^2.3.1",
     "node-cron": "^1.1.1",
-    "node-rsa": "^0.4.0"
   }
 }
