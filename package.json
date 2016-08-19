@@ -1,0 +1,19 @@
+{
+  "name": "decryptobox",
+  "version": "1.0.0",
+  "description": "Decrypt Stuff",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cryptico": "^1.0.2",
+    "fs": "0.0.2",
+    "jsencrypt": "^2.3.1",
+    "node-cron": "^1.1.1",
+    "node-rsa": "^0.4.0"
+  }
+}
