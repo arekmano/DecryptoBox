@@ -4,7 +4,6 @@ module.exports = {
   URL_OPTIONS: {
     hostname: "localhost",
     port: 3000,
-    agent: false,
-    path: "/read"
+    agent: false
   }
 };

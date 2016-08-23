@@ -9,7 +9,7 @@ function getEntries(){
     hostname : Settings.URL_OPTIONS.hostname,
     port : Settings.URL_OPTIONS.port,
     agent : Settings.URL_OPTIONS.agent,
-    path: Settings.URL_OPTIONS.path
+    path: '/read'
   };
     http.get(get_options, function(res) {
     res.on('data', function(chunk) {
@@ -34,7 +34,7 @@ function removeEntries(){
     port : Settings.URL_OPTIONS.port,
     agent : Settings.URL_OPTIONS.agent,
     method: 'DELETE',
-    path: Settings.URL_OPTIONS.path
+    path: '/read'
   };
   var req = http.request(delete_options, function(res) {
     res.on('data', function(chunk) {
