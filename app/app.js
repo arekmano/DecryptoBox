@@ -1,4 +1,4 @@
-var http = require('http');
+var https = require('https');
 var crypto = require('crypto');
 var constants = require('constants');
 var Processor = require('./processor');
@@ -11,11 +11,11 @@ function getEntries(){
     agent : Settings.URL_OPTIONS.agent,
     path: '/read'
   };
-    http.get(get_options, function(res) {
+    https.get(get_options, function(res) {
     res.on('data', function(chunk) {
       var response_json = JSON.parse(chunk.toString());
       if (response_json.length === 0){
-        console.log(new Date() + ': Found No entries');
+        console.log(new Date() + ': Found no pairs in crypto message box');
       } else {
         console.log(new Date() + ': Found ' + response_json.length + ' pair(s)');
         removeEntries();
@@ -36,9 +36,9 @@ function removeEntries(){
     method: 'DELETE',
     path: '/read'
   };
-  var req = http.request(delete_options, function(res) {
+  var req = https.request(delete_options, function(res) {
     res.on('data', function(chunk) {
-      console.log(new Date() + ': Cleared Messages.');
+      console.log(new Date() + ': Cleared Stored Pairs');
     });
   });
   req.end();
@@ -49,7 +49,6 @@ function decrypt(pair){
     key: crypto.privateDecrypt( {key: Settings.PRIVATE_KEY, padding: constants.RSA_PKCS1_PADDING}, new Buffer(pair.key, 'base64')).toString(),
     value: crypto.privateDecrypt( {key: Settings.PRIVATE_KEY, padding: constants.RSA_PKCS1_PADDING}, new Buffer(pair.value, 'base64')).toString()
   };
-  console.log(new Date() + ': Decrypted Key/Value');
   console.log(decrypted_pair);
   return decrypted_pair;
 }
