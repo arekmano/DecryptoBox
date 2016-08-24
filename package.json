@@ -11,6 +11,7 @@
   "license": "Go away license",
   "dependencies": {
     "fs": "0.0.2",
-    "node-cron": "^1.1.1"
+    "node-cron": "^1.1.1",
+    "winston": "^2.2.0"
   }
 }

@@ -3,6 +3,9 @@ var crypto = require('crypto');
 var constants = require('constants');
 var Processor = require('./processor');
 var Settings = require('./settings');
+var winston = require('winston');
+
+winston.add(winston.transports.File, { filename: 'info.log' });
 
 function getEntries(){
   var get_options = {
@@ -15,9 +18,9 @@ function getEntries(){
     res.on('data', function(chunk) {
       var response_json = JSON.parse(chunk.toString());
       if (response_json.length === 0){
-        console.log(new Date() + ': Found no pairs in crypto message box');
+        winston.info(new Date() + ': Found no pairs in crypto message box');
       } else {
-        console.log(new Date() + ': Found ' + response_json.length + ' pair(s)');
+        winston.info(new Date() + ': Found ' + response_json.length + ' pair(s)');
         removeEntries();
       }
       response_json.forEach(function(element){
@@ -38,18 +41,19 @@ function removeEntries(){
   };
   var req = https.request(delete_options, function(res) {
     res.on('data', function(chunk) {
-      console.log(new Date() + ': Cleared Stored Pairs');
+      winston.info(new Date() + ': Cleared Stored Pairs');
     });
   });
   req.end();
 }
 
 function decrypt(pair){
+  winston.info(pair)
   decrypted_pair = {
     key: crypto.privateDecrypt( {key: Settings.PRIVATE_KEY, padding: constants.RSA_PKCS1_PADDING}, new Buffer(pair.key, 'base64')).toString(),
     value: crypto.privateDecrypt( {key: Settings.PRIVATE_KEY, padding: constants.RSA_PKCS1_PADDING}, new Buffer(pair.value, 'base64')).toString()
   };
-  console.log(decrypted_pair);
+  winston.info(decrypted_pair);
   return decrypted_pair;
 }
 
